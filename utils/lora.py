@@ -6,13 +6,13 @@ from transformers.pytorch_utils import Conv1D
 
 _CURRENT_QUANT_CONFIG = None
 
-@staticmethod
 def set_active_quant_config(precision: str):
+    """Set the currently active quantization precision config name."""
     global _CURRENT_QUANT_CONFIG
     _CURRENT_QUANT_CONFIG = precision
 
-@staticmethod
 def get_active_quant_config():
+    """Get the currently active quantization precision config name."""
     return _CURRENT_QUANT_CONFIG
 
 class LoRALayer(nn.Module):

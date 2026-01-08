@@ -20,7 +20,7 @@ class QuantBlockConfig():
     MLP_W_layerwise: bool = True
     MLP_layerwise: bool = False
 
-    gradclip: tuple = (-2, 2)
+    gradclip: tuple = None
 
     @classmethod
     def from_dict(cls, d: dict) -> "QuantBlockConfig":
@@ -77,16 +77,13 @@ class SymQuantization(torch.autograd.Function):
 
 
 class QuantLinear(nn.Module):
-    def __init__(self, layer, W_bit: int = 32, A_bit: int = 32, W_layerwise: bool = True, A_layerwise: bool = True, gradclip: tuple = None):
+    def __init__(self, layer, quant_config: QuantBlockConfig = None, is_attention: bool = False):
         super().__init__()
         self.in_features = layer.weight.shape[0]
         self.out_features = layer.weight.shape[1]
 
-        self.W_bit = W_bit
-        self.A_bit = A_bit
-        self.W_layerwise = W_layerwise
-        self.A_layerwise = A_layerwise
-        self.gradclip = gradclip
+        self.quant_config = quant_config
+        self.is_attention = is_attention
         
         self.weight = nn.Parameter(layer.weight.data.clone())
         self.bias = nn.Parameter(layer.bias.data.clone()) if layer.bias is not None else None
@@ -94,17 +91,32 @@ class QuantLinear(nn.Module):
         self.is_conv1d = isinstance(layer, Conv1D)
 
     def forward(self, x):
+        # Read quantization config dynamically at forward time
+        if self.quant_config is not None:
+            if self.is_attention:
+                W_bit = self.quant_config.Attention_W_bit
+                A_bit = self.quant_config.Attention_A_bit
+                W_layerwise = self.quant_config.Attention_W_layerwise
+                A_layerwise = self.quant_config.Attention_A_layerwise
+            else:
+                W_bit = self.quant_config.MLP_W_bit
+                A_bit = self.quant_config.MLP_A_bit
+                W_layerwise = self.quant_config.MLP_W_layerwise
+                A_layerwise = self.quant_config.MLP_A_layerwise
+            gradclip = self.quant_config.gradclip
+        else:
+            # Fallback to no quantization
+            W_bit = A_bit = 32
+            W_layerwise = A_layerwise = True
+            gradclip = None
 
         weight = self.weight
-        if self.W_bit and self.W_bit < 32:
-            weight = self.quantFunc(self.weight, self.W_bit, 
-                                       self.W_layerwise, self.gradclip)
+        if W_bit and W_bit < 32:
+            weight = self.quantFunc(self.weight, W_bit, W_layerwise, gradclip)
 
         act = x
-        if self.A_bit and self.A_bit < 32:
-            act = self.quantFunc(x, self.A_bit, 
-                                    self.A_layerwise, self.gradclip)
-
+        if A_bit and A_bit < 32:
+            act = self.quantFunc(x, A_bit, A_layerwise, gradclip)
 
         out = act @ weight
         if self.bias is not None:
@@ -146,8 +158,10 @@ def quantize_model(model, quant_configs):
                 config=model.config,
                 is_cross_attention=module.is_cross_attention,
                 layer_idx=module.layer_idx,
-                quant_config=quant_config
+                quant_config=quant_config,
+                quant_func=SymQuantization.apply
             )
+            
             new_module.load_state_dict(module.state_dict(), strict=False)
             setattr(parent, attr_name, new_module)
 

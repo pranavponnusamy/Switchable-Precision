@@ -198,8 +198,8 @@ class GPT2AttentionQ(nn.Module):
             self.c_attn = Conv1D(2 * self.embed_dim, self.embed_dim)
             self.q_attn = Conv1D(self.embed_dim, self.embed_dim)
         else:
-            self.c_attn = QuantLinear(Conv1D(3 * self.embed_dim, self.embed_dim), W_bit=self.quant_config.Attention_W_bit, A_bit=self.quant_config.Attention_A_bit, W_layerwise=self.quant_config.Attention_W_layerwise, A_layerwise=self.quant_config.Attention_A_layerwise, gradclip=self.quant_config.gradclip)
-        self.c_proj = QuantLinear(Conv1D(self.embed_dim, self.embed_dim), W_bit=self.quant_config.Attention_W_bit, A_bit=self.quant_config.Attention_A_bit, W_layerwise=self.quant_config.Attention_W_layerwise, A_layerwise=self.quant_config.Attention_A_layerwise, gradclip=self.quant_config.gradclip)
+            self.c_attn = QuantLinear(Conv1D(3 * self.embed_dim, self.embed_dim), quant_config=self.quant_config, is_attention=True)
+        self.c_proj = QuantLinear(Conv1D(self.embed_dim, self.embed_dim), quant_config=self.quant_config, is_attention=True)
 
         self.attn_dropout = nn.Dropout(config.attn_pdrop)
         self.resid_dropout = nn.Dropout(config.resid_pdrop)
@@ -332,11 +332,11 @@ class GPT2AttentionQ(nn.Module):
         # Apply per-token KV quantization for QAT (Quantization-Aware Training)
         # During training: quantize K/V tensors with gradient flow via STE
         # During generation: quantize current token's K/V before caching
-        if self.quant_config is not None and self.quant_func is not None and self.quant_config.KV_bit < 32:
-            key_states = self.quant_func(key_states, self.quant_config.KV_bit, 
-                                         self.quant_config.KV_layerwise, self.quant_config.gradclip)
-            value_states = self.quant_func(value_states, self.quant_config.KV_bit, 
-                                           self.quant_config.KV_layerwise, self.quant_config.gradclip)
+        if self.quant_config is not None and self.quant_func is not None and self.quant_config.Attention_KV_bit < 32:
+            key_states = self.quant_func(key_states, self.quant_config.Attention_KV_bit, 
+                                         self.quant_config.Attention_KV_layerwise, self.quant_config.gradclip)
+            value_states = self.quant_func(value_states, self.quant_config.Attention_KV_bit, 
+                                           self.quant_config.Attention_KV_layerwise, self.quant_config.gradclip)
 
         if (past_key_values is not None and not is_cross_attention) or (
             past_key_values is not None and is_cross_attention and not is_updated
@@ -385,8 +385,8 @@ class GPT2MLPQ(nn.Module):
     def __init__(self, intermediate_size, config, quant_config: QuantBlockConfig = None):
         super().__init__()
         embed_dim = config.hidden_size
-        self.c_fc = QuantLinear(Conv1D(intermediate_size, embed_dim), W_bit=quant_config.MLP_W_bit, A_bit=quant_config.MLP_A_bit, W_layerwise=quant_config.MLP_W_layerwise, A_layerwise=quant_config.MLP_A_layerwise, gradclip=quant_config.gradclip)
-        self.c_proj = QuantLinear(Conv1D(embed_dim, intermediate_size), W_bit=quant_config.MLP_W_bit, A_bit=quant_config.MLP_A_bit, W_layerwise=quant_config.MLP_W_layerwise, A_layerwise=quant_config.MLP_A_layerwise, gradclip=quant_config.gradclip)
+        self.c_fc = QuantLinear(Conv1D(intermediate_size, embed_dim), quant_config=quant_config, is_attention=False)
+        self.c_proj = QuantLinear(Conv1D(embed_dim, intermediate_size), quant_config=quant_config, is_attention=False)
         self.act = ACT2FN[config.activation_function]
         self.dropout = nn.Dropout(config.resid_pdrop)
 
