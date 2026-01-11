@@ -79,3 +79,4 @@ urllib3==2.6.2
 wcwidth==0.2.14
 xxhash==3.6.0
 yarl==1.22.0
+wandb==0.17.10

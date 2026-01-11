@@ -59,7 +59,7 @@ class SymQuantization(torch.autograd.Function):
         # quantize and dequantize the input
         # we add a small epsilon to avoid division by zero
         alpha = max_val / ((2**(num_bits - 1) - 1) + 1e-6)
-        X_q = torch.round(input / alpha) * alpha
+        X_q = torch.round(input / (alpha + 1e-6)) * alpha
 
         return X_q.contiguous()
 
