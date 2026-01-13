@@ -19,9 +19,10 @@ from datasets import load_dataset
 from torch.utils.data import DataLoader
 import wandb
 
-num_epochs = 15
-train_batch_size = 1
-val_batch_size = 4
+num_epochs = 20
+train_batch_size = 80
+val_batch_size = 140
+checkpoint_dir = "checkpoints"
 
 def setup_ddp():
     """Initialize distributed training."""
@@ -69,6 +70,9 @@ is_distributed = world_size > 1
 
 gc.collect()
 torch.cuda.empty_cache()
+
+if (not os.path.exists(checkpoint_dir) and is_main_process(rank)):
+    os.makedirs(checkpoint_dir)
 
 tokenizer = AutoTokenizer.from_pretrained("openai-community/gpt2")
 model = GPT2LMHeadModel.from_pretrained("openai-community/gpt2")
@@ -336,7 +340,7 @@ print_rank0(f"Training samples: {len(train_data)}", rank)
 print_rank0(f"Validation samples: {len(val_data)}", rank)
 print_rank0(f"Batches per epoch: {len(train_loader)}", rank)
 print_rank0(f"World size: {world_size}", rank)
-print_rank0(f"Effective batch size: {64 * world_size}", rank)
+print_rank0(f"Effective batch size: {train_batch_size * world_size}", rank)
 
 
 def create_masked_labels(tokenizer, contexts, questions, answers, max_length=512):
@@ -511,7 +515,7 @@ if is_main_process(rank):
             "distributed": is_distributed,
         },
     )
-    wandb.watch(model, log="gradients", log_freq=10)
+    wandb.watch(model, log="gradients", log_freq=20)
 
 # Get the underlying model for config switching
 base_model = model.module if hasattr(model, 'module') else model
@@ -634,6 +638,13 @@ for epoch in range(num_epochs):
             step=global_step,
         )
     
+    # Save checkpoint after each epoch (only from rank 0)
+    if is_main_process(rank):
+        lora.save_lora(base_model, f"{checkpoint_dir}/lora_epoch_{epoch + 1}.pt", precisions)
+        wandb.save(f"{checkpoint_dir}/lora_epoch_{epoch + 1}.pt")
+        print(f"Saved checkpoint: lora_epoch_{epoch + 1}.pt", flush=True)
+    
+    
     # Track best validation loss
     improved = []
     for p in precisions:
@@ -647,21 +658,18 @@ for epoch in range(num_epochs):
                 {f"val/best/{p}": best_val_loss[p] for p in improved},
                 step=global_step,
             )
-    
-    # Save checkpoint after each epoch (only from rank 0)
-    if is_main_process(rank):
-        lora.save_lora(base_model, f"lora_epoch_{epoch + 1}.pt", precisions)
-        wandb.save(f"lora_epoch_{epoch + 1}.pt")
-        print(f"Saved checkpoint: lora_epoch_{epoch + 1}.pt", flush=True)
-    
     # Synchronize before next epoch
     if is_distributed:
         dist.barrier()
 
+    print_rank0(f"Cleaning up memory...", rank)
+    gc.collect()
+    torch.cuda.empty_cache()
+
 # Save final model (only from rank 0)
 if is_main_process(rank):
-    lora.save_lora(base_model, "lora_final.pt", precisions)
-    print(f"\nTraining complete! Final model saved to lora_final.pt", flush=True)
+    lora.save_lora(base_model, f"{checkpoint_dir}/lora_final.pt", precisions)
+    print(f"\nTraining complete! Final model saved to {checkpoint_dir}/lora_final.pt", flush=True)
     print(f"Best validation losses: {best_val_loss}", flush=True)
     if wandb_run is not None:
         wandb_run.summary["best_val_loss"] = best_val_loss
