@@ -2,8 +2,6 @@ aiohappyeyeballs==2.6.1
 aiohttp==3.13.3
 aiosignal==1.4.0
 anyio==4.12.1
-appnope==0.1.4
-asttokens==3.0.1
 async-timeout==5.0.1
 attrs==25.4.0
 certifi==2026.1.4
@@ -79,4 +77,5 @@ urllib3==2.6.2
 wcwidth==0.2.14
 xxhash==3.6.0
 yarl==1.22.0
-wandb==0.17.10
+wandb
+scipy
