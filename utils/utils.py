@@ -182,3 +182,12 @@ def set_active_quant_config(singleton_config:dict[int, QuantBlockConfig], target
             sing_cfg.MLP_W_layerwise = tgt_cfg.MLP_W_layerwise
             sing_cfg.MLP_layerwise = tgt_cfg.MLP_layerwise
             sing_cfg.gradclip = tgt_cfg.gradclip
+
+def uniform_quant_config(singleton_config:dict[int, QuantBlockConfig], bit:int):
+    for idx, cfg in singleton_config.items():
+        cfg.Attention_W_bit = bit
+        cfg.Attention_A_bit = bit
+        cfg.Attention_KV_bit = bit
+        cfg.MLP_W_bit = bit
+        cfg.MLP_A_bit = bit
+        cfg.gradclip = None
