@@ -3,3 +3,6 @@
 wandb/
 Nlogs/
 hf/
+.venv/
+adv/
+checkpoints/

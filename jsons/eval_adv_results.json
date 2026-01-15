@@ -1,0 +1,176 @@
+{
+  "checkpoint": "adv/checkpoints/model_lora_3.pt",
+  "num_samples": 20,
+  "seed": 42,
+  "accuracy_summary": {
+    "default": {
+      "correct": 2,
+      "total": 20,
+      "accuracy": 10.0
+    }
+  },
+  "detailed_results": {
+    "default": [
+      {
+        "context": "Newton came to realize that the effects of gravity might be observed in different ways at larger distances. In particular, Newton determined that the acceleration of the Moon around the Earth could be ascribed to the same force of gravity if the acceleration due to gravity decreased as an inverse square law. Further, Newton realized that the acceleration due to gravity is proportional to the mass of the attracting body. Combining these ideas gives a formula that relates the mass () and the radius () of the Earth to the gravitational acceleration:",
+        "question": "How might gravity effects be observed differently according to Newton?",
+        "ground_truth": "at larger distances.",
+        "model_answer": "The gravitational acceleration of the Moon is proportional to the mass of the attracting body. The radius () of the Earth is proportional to the mass of the attracting",
+        "correct": false,
+        "reasoning": "The question asks how gravity effects might be observed differently, and the context clearly states 'at larger distances.' The model's answer describes the proportionality of acceleration to mass, which is a detail about the force law, but does not provide the correct answer regarding distance."
+      },
+      {
+        "context": "The question of whether P equals NP is one of the most important open questions in theoretical computer science because of the wide implications of a solution. If the answer is yes, many important problems can be shown to have more efficient solutions. These include various types of integer programming problems in operations research, many problems in logistics, protein structure prediction in biology, and the ability to find formal proofs of pure mathematics theorems. The P versus NP problem is one of the Millennium Prize Problems proposed by the Clay Mathematics Institute. There is a US$1,000,000 prize for resolving the problem.",
+        "question": "What is the prize offered for finding a solution to P=NP?",
+        "ground_truth": "$1,000,000",
+        "model_answer": "The prize is offered for solving the problem of P=NP. The prize is offered for solving the problem of NP. The prize is offered for solving",
+        "correct": false,
+        "reasoning": "The question asks for the amount of the prize ($1,000,000). The model's answer only states that a prize exists for solving P=NP but fails to provide the monetary value."
+      },
+      {
+        "context": "As the designated home team in the annual rotation between AFC and NFC teams, the Broncos elected to wear their road white jerseys with matching white pants. Elway stated, \"We've had Super Bowl success in our white uniforms.\" The Broncos last wore matching white jerseys and pants in the Super Bowl in Super Bowl XXXIII, Elway's last game as Denver QB, when they defeated the Atlanta Falcons 34\u201319. In their only other Super Bowl win in Super Bowl XXXII, Denver wore blue jerseys, which was their primary color at the time. They also lost Super Bowl XXI when they wore white jerseys, but they are 0-4 in Super Bowls when wearing orange jerseys, losing in Super Bowl XII, XXII, XXIV, and XLVIII. The only other AFC champion team to have worn white as the designated home team in the Super Bowl was the Pittsburgh Steelers; they defeated the Seattle Seahawks 21\u201310 in Super Bowl XL 10 seasons prior. The Broncos' decision to wear white meant the Panthers would wear their standard home uniform: black jerseys with silver pants.",
+        "question": "What color were the Bronco's uniforms in Super Bowl 50?",
+        "ground_truth": "white",
+        "model_answer": "The Broncos wore their standard home uniform in Super Bowl 50. The Broncos wore their standard home uniform in Super Bowl XXIII, Super Bowl XXIV,",
+        "correct": false,
+        "reasoning": "The model fails to state the color (white). The context explicitly mentions that the Broncos elected to wear their 'road white jerseys' even though they were the designated home team. Stating they wore their 'standard home uniform' does not convey the color requested by the question."
+      },
+      {
+        "context": "Almost all ctenophores are predators, taking prey ranging from microscopic larvae and rotifers to the adults of small crustaceans; the exceptions are juveniles of two species, which live as parasites on the salps on which adults of their species feed. In favorable circumstances, ctenophores can eat ten times their own weight in a day. Only 100\u2013150 species have been validated, and possibly another 25 have not been fully described and named. The textbook examples are cydippids with egg-shaped bodies and a pair of retractable tentacles fringed with tentilla (\"little tentacles\") that are covered with colloblasts, sticky cells that capture prey. The phylum has a wide range of body forms, including the flattened, deep-sea platyctenids, in which the adults of most species lack combs, and the coastal beroids, which lack tentacles and prey on other ctenophores by using huge mouths armed with groups of large, stiffened cilia that act as teeth. These variations enable different species to build huge populations in the same area, because they specialize in different types of prey, which they capture by as wide a range of methods as spiders use.",
+        "question": "What are the little tentacles that cydippids have called?",
+        "ground_truth": "tentilla",
+        "model_answer": "The tentacles are a type of jellyfish that is found in the ocean floor. The jellyfish is a type of jellyfish that is found in the",
+        "correct": false,
+        "reasoning": "The ground truth identifies the specific biological term 'tentilla.' The model's answer is an irrelevant hallucination that discusses jellyfish and the ocean floor, failing to name the little tentacles."
+      },
+      {
+        "context": "In November 1969, Gemini veteran Charles \"Pete\" Conrad and rookie Alan L. Bean made a precision landing on Apollo 12 within walking distance of the Surveyor 3 unmanned lunar probe, which had landed in April 1967 on the Ocean of Storms. The Command Module Pilot was Gemini veteran Richard F. Gordon, Jr. Conrad and Bean carried the first lunar surface color television camera, but it was damaged when accidentally pointed into the Sun. They made two EVAs totaling 7 hours and 45 minutes. On one, they walked to the Surveyor, photographed it, and removed some parts which they returned to Earth.",
+        "question": "Which lunar probe was near the Apollo 12 crew's landing site?",
+        "ground_truth": "Surveyor 3",
+        "model_answer": "The Apollo 12 lunar probe was the first lunar surface color television camera to be used on the Moon. The camera was mounted on a lunar surface camera mounted",
+        "correct": false,
+        "reasoning": "The question asks for the name of the lunar probe near the landing site, which is 'Surveyor 3' according to the context. The model incorrectly answers by discussing the color television camera carried by the Apollo 12 crew, which is a piece of equipment, not the previously landed unmanned probe."
+      },
+      {
+        "context": "Oxygen gas can also be produced through electrolysis of water into molecular oxygen and hydrogen. DC electricity must be used: if AC is used, the gases in each limb consist of hydrogen and oxygen in the explosive ratio 2:1. Contrary to popular belief, the 2:1 ratio observed in the DC electrolysis of acidified water does not prove that the empirical formula of water is H2O unless certain assumptions are made about the molecular formulae of hydrogen and oxygen themselves. A similar method is the electrocatalytic O\n2 evolution from oxides and oxoacids. Chemical catalysts can be used as well, such as in chemical oxygen generators or oxygen candles that are used as part of the life-support equipment on submarines, and are still part of standard equipment on commercial airliners in case of depressurization emergencies. Another air separation technology involves forcing air to dissolve through ceramic membranes based on zirconium dioxide by either high pressure or an electric current, to produce nearly pure O\n2 gas.",
+        "question": "Electrolysis of what can be used to produce oxygen and hydrogen?",
+        "ground_truth": "water",
+        "model_answer": "Oxygen gas can be produced through electrolysis of water into molecular oxygen and hydrogen. DC electricity must be used: if AC is used, the gases",
+        "correct": true,
+        "reasoning": "The model's answer is an excerpt from the context that contains the phrase 'electrolysis of water into molecular oxygen and hydrogen,' which explicitly names 'water' as the substance being electrolyzed to produce oxygen and hydrogen, thus correctly answering the question."
+      },
+      {
+        "context": "Over the next five days, private conferences were held to determine Luther's fate. The Emperor presented the final draft of the Edict of Worms on 25 May 1521, declaring Luther an outlaw, banning his literature, and requiring his arrest: \"We want him to be apprehended and punished as a notorious heretic.\" It also made it a crime for anyone in Germany to give Luther food or shelter. It permitted anyone to kill Luther without legal consequence.",
+        "question": "When was the Edict of Worms presented?",
+        "ground_truth": "25 May 1521",
+        "model_answer": "On 25 May 1521, the Emperor sent a letter to the Emperor's Council, which was to be held in the city of St. Petersburg.",
+        "correct": false,
+        "reasoning": "The model correctly identifies the date (25 May 1521), but the description of the event is entirely incorrect and fabricated. The context states the Edict of Worms was presented; the model claims the Emperor sent a letter to St. Petersburg, which is a significant factual error that invalidates the answer."
+      },
+      {
+        "context": "On Tesla's 75th birthday in 1931, Time magazine put him on its cover. The cover caption \"All the world's his power house\" noted his contribution to electrical power generation. He received congratulatory letters from more than 70 pioneers in science and engineering, including Albert Einstein.",
+        "question": "How many other important people sent letters?",
+        "ground_truth": "more than 70",
+        "model_answer": "He",
+        "correct": false,
+        "reasoning": "The question asks for a quantity ('How many'), which the Ground Truth provides ('more than 70'). The Model's Answer ('He') is a pronoun and fails to answer the quantitative question."
+      },
+      {
+        "context": "Alternatively, glucose monomers in the chloroplast can be linked together to make starch, which accumulates into the starch grains found in the chloroplast. Under conditions such as high atmospheric CO2 concentrations, these starch grains may grow very large, distorting the grana and thylakoids. The starch granules displace the thylakoids, but leave them intact. Waterlogged roots can also cause starch buildup in the chloroplasts, possibly due to less sucrose being exported out of the chloroplast (or more accurately, the plant cell). This depletes a plant's free phosphate supply, which indirectly stimulates chloroplast starch synthesis. While linked to low photosynthesis rates, the starch grains themselves may not necessarily interfere significantly with the efficiency of photosynthesis, and might simply be a side effect of another photosynthesis-depressing factor.",
+        "question": "What is an alternate way to make starch?",
+        "ground_truth": "glucose monomers in the chloroplast can be linked together",
+        "model_answer": "The starch is a mixture of two different types of starch, called starch-like and starch-like-like. The starch-like type is the",
+        "correct": false,
+        "reasoning": "The model's answer discusses the composition/types of starch (starch-like, starch-like-like) rather than explaining the alternate process of how starch is made, which the ground truth correctly identifies as linking glucose monomers in the chloroplast."
+      },
+      {
+        "context": "Starting in 1894, Tesla began investigating what he referred to as radiant energy of \"invisible\" kinds after he had noticed damaged film in his laboratory in previous experiments (later identified as \"Roentgen rays\" or \"X-Rays\"). His early experiments were with Crookes tubes, a cold cathode electrical discharge tube. Soon after, much of Tesla's early research\u2014hundreds of invention models, plans, notes, laboratory data, tools, photographs, valued at $50,000\u2014was lost in the 5th Avenue laboratory fire of March 1895. Tesla is quoted by The New York Times as saying, \"I am in too much grief to talk. What can I say?\" Tesla may have inadvertently captured an X-ray image\u2014predating, by a few weeks, Wilhelm R\u00f6ntgen's December 1895 announcement of the discovery of x-rays\u2014when he tried to photograph Mark Twain illuminated by a Geissler tube, an earlier type of gas discharge tube. The only thing captured in the image was the metal locking screw on the camera lens.:134",
+        "question": "What type of image was Tesla thought to have accidentally taken a week prior to the announcement of its discovery?",
+        "ground_truth": "X-ray image",
+        "model_answer": "The first image was taken on March 1894, when Tesla was working on a project to photograph a geissler tube. The second image was taken",
+        "correct": false,
+        "reasoning": "The question asks for the type of image (X-ray image). The model's answer focuses on the date and the experimental equipment used (Geissler tube), but fails to identify the type of image that was accidentally produced, which is X-ray (Roentgen ray). Furthermore, the answer is cut off."
+      },
+      {
+        "context": "Sayyid Abul Ala Maududi was an important early twentieth-century figure in the Islamic revival in India, and then after independence from Britain, in Pakistan. Trained as a lawyer he chose the profession of journalism, and wrote about contemporary issues and most importantly about Islam and Islamic law. Maududi founded the Jamaat-e-Islami party in 1941 and remained its leader until 1972. However, Maududi had much more impact through his writing than through his political organising. His extremely influential books (translated into many languages) placed Islam in a modern context, and influenced not only conservative ulema but liberal modernizer Islamists such as al-Faruqi, whose \"Islamization of Knowledge\" carried forward some of Maududi's key principles.",
+        "question": "Where did Maududi's books place Islam?",
+        "ground_truth": "in a modern context",
+        "model_answer": "In the early twentieth century, Maududi was a leading figure in the Islamic revival in India. He was a leading figure in the Islamic revival in",
+        "correct": false,
+        "reasoning": "The model answer describes Maududi's identity and historical role (a leading figure in the Islamic revival) but does not address the question of where his books placed Islam, which according to the ground truth was 'in a modern context'."
+      },
+      {
+        "context": "Construction is the process of constructing a building or infrastructure. Construction differs from manufacturing in that manufacturing typically involves mass production of similar items without a designated purchaser, while construction typically takes place on location for a known client. Construction as an industry comprises six to nine percent of the gross domestic product of developed countries. Construction starts with planning,[citation needed] design, and financing and continues until the project is built and ready for use.",
+        "question": "What is the process of constructing a building or infrastructure?",
+        "ground_truth": "Construction",
+        "model_answer": "Construction is the process of constructing a building or infrastructure. Construction differs from manufacturing in that manufacturing typically involves mass production of similar items without a designated purchaser,",
+        "correct": true,
+        "reasoning": "The ground truth is 'Construction.' The model's answer begins by stating, 'Construction is the process of constructing a building or infrastructure,' which directly and correctly answers the question, even though the model provides additional descriptive text."
+      },
+      {
+        "context": "The Super Bowl 50 Host Committee has vowed to be \"the most giving Super Bowl ever\", and will dedicate 25 percent of all money it raises for philanthropic causes in the Bay Area. The committee created the 50 fund as its philanthropic initiative and focuses on providing grants to aid with youth development, community investment and sustainable environments.",
+        "question": "How many will the host committee dedicate to local charities?",
+        "ground_truth": "25 percent",
+        "model_answer": "The Super Bowl 50 Host Committee will dedicate $1 million to local charities, and will spend $1 million on local programs.",
+        "correct": false,
+        "reasoning": "The ground truth answer (25 percent) is directly supported by the context. The model's answer provides a specific monetary figure ($1 million) that is not found or supported by the provided context and is therefore factually incorrect based on the given information."
+      },
+      {
+        "context": "The game's media day, which was typically held on the Tuesday afternoon prior to the game, was moved to the Monday evening and re-branded as Super Bowl Opening Night. The event was held on February 1, 2016 at SAP Center in San Jose. Alongside the traditional media availabilities, the event featured an opening ceremony with player introductions on a replica of the Golden Gate Bridge.",
+        "question": "In what city is SAP Center located?",
+        "ground_truth": "San Jose",
+        "model_answer": "SAP Center is located in",
+        "correct": false,
+        "reasoning": "The model's answer is an incomplete sentence fragment and fails to provide the required city name (San Jose) needed to answer the question."
+      },
+      {
+        "context": "In 1928, Tesla received his last patent, U.S. Patent 1,655,114, for a biplane capable of taking off vertically (VTOL aircraft) and then be \"gradually tilted through manipulation of the elevator devices\" in flight until it was flying like a conventional plane. Tesla thought the plane would sell for less than $1,000.:251 Although the aircraft was probably impractical, it may be the earliest known design for what became the tiltrotor/tilt-wing concept as well as the earliest proposal for the use of turbine engines in rotor aircraft.[improper synthesis?]",
+        "question": "For what invention was U.S. Patent 1,655,114 granted?",
+        "ground_truth": "VTOL aircraft",
+        "model_answer": "U.S. Patent 1,655,114 was granted in 1928 by the U.S. Patent and Trademark Office. The patent was issued",
+        "correct": false,
+        "reasoning": "The model's answer only provides metadata about the patent (when and where it was granted) but fails to identify the invention itself (a VTOL aircraft), thus not answering the question."
+      },
+      {
+        "context": "The common allotrope of elemental oxygen on Earth is called dioxygen, O\n2. It is the form that is a major part of the Earth's atmosphere (see Occurrence). O2 has a bond length of 121 pm and a bond energy of 498 kJ\u00b7mol\u22121, which is smaller than the energy of other double bonds or pairs of single bonds in the biosphere and responsible for the exothermic reaction of O2 with any organic molecule. Due to its energy content, O2 is used by complex forms of life, such as animals, in cellular respiration (see Biological role). Other aspects of O\n2 are covered in the remainder of this article.",
+        "question": "For what purpose is oxygen used by animal life?",
+        "ground_truth": "cellular respiration",
+        "model_answer": "Oxygen is used to make oxygen, which is used to make oxygen, which is used to make oxygen, which is used to make oxygen, which",
+        "correct": false,
+        "reasoning": "The model's answer is repetitive and nonsensical (\"Oxygen is used to make oxygen...\"). It fails to mention 'cellular respiration' or any equivalent purpose for oxygen use by animal life, making it semantically incorrect."
+      },
+      {
+        "context": "An increase in imported cars into North America forced General Motors, Ford and Chrysler to introduce smaller and fuel-efficient models for domestic sales. The Dodge Omni / Plymouth Horizon from Chrysler, the Ford Fiesta and the Chevrolet Chevette all had four-cylinder engines and room for at least four passengers by the late 1970s. By 1985, the average American vehicle moved 17.4 miles per gallon, compared to 13.5 in 1970. The improvements stayed even though the price of a barrel of oil remained constant at $12 from 1974 to 1979. Sales of large sedans for most makes (except Chrysler products) recovered within two model years of the 1973 crisis. The Cadillac DeVille and Fleetwood, Buick Electra, Oldsmobile 98, Lincoln Continental, Mercury Marquis, and various other luxury oriented sedans became popular again in the mid-1970s. The only full-size models that did not recover were lower price models such as the Chevrolet Bel Air, and Ford Galaxie 500. Slightly smaller, mid-size models such as the Oldsmobile Cutlass, Chevrolet Monte Carlo, Ford Thunderbird and various other models sold well.",
+        "question": "By which year did the American cars mpg start to improve?",
+        "ground_truth": "1985",
+        "model_answer": "The American cars mpg began to improve in the late 1970s. The average American car mpg increased from 1.9 mpg in 1970 to",
+        "correct": false,
+        "reasoning": "The Ground Truth states '1985,' which is the year the context uses to quantify the average MPG improvement (17.4 MPG). The Model's Answer states 'late 1970s,' referencing the time when new, fuel-efficient models were introduced. Since the specific years/periods provided are different, the answers are not semantically equivalent."
+      },
+      {
+        "context": "There were many religions practiced during the Yuan dynasty, such as Buddhism, Islam, and Christianity. The establishment of the Yuan dynasty had dramatically increased the number of Muslims in China. However, unlike the western khanates, the Yuan dynasty never converted to Islam. Instead, Kublai Khan, the founder of the Yuan dynasty, favored Buddhism, especially the Tibetan variants. As a result, Tibetan Buddhism was established as the de facto state religion. The top-level department and government agency known as the Bureau of Buddhist and Tibetan Affairs (Xuanzheng Yuan) was set up in Khanbaliq (modern Beijing) to supervise Buddhist monks throughout the empire. Since Kublai Khan only esteemed the Sakya sect of Tibetan Buddhism, other religions became less important. He and his successors kept a Sakya Imperial Preceptor (Dishi) at court. Before the end of the Yuan dynasty, 14 leaders of the Sakya sect had held the post of Imperial Preceptor, thereby enjoying special power. Furthermore, Mongol patronage of Buddhism resulted in a number of monuments of Buddhist art. Mongolian Buddhist translations, almost all from Tibetan originals, began on a large scale after 1300. Many Mongols of the upper class such as the Jalayir and the Oronar nobles as well as the emperors also patronized Confucian scholars and institutions. A considerable number of Confucian and Chinese historical works were translated into the Mongolian language.",
+        "question": "Which religion did Kublai prefer?",
+        "ground_truth": "Buddhism, especially the Tibetan variants",
+        "model_answer": "The Kublai Khanate was a Buddhist-dominated state. The Kublai Khanate was a Buddhist-dominated state. The Kublai",
+        "correct": false,
+        "reasoning": "While the answer correctly identifies Buddhism, it describes the resulting state (a 'Buddhist-dominated state') rather than directly stating Kublai's preference. Crucially, it fails to mention the essential detail that he favored the 'Tibetan variants' of Buddhism, which the ground truth includes and the context emphasizes."
+      },
+      {
+        "context": "Orientalism, as theorized by Edward Said, refers to how the West developed an imaginative geography of the East. This imaginative geography relies on an essentializing discourse that represents neither the diversity nor the social reality of the East. Rather, by essentializing the East, this discourse uses the idea of place-based identities to create difference and distance between \"we\" the West and \"them\" the East, or \"here\" in the West and \"there\" in the East. This difference was particularly apparent in textual and visual works of early European studies of the Orient that positioned the East as irrational and backward in opposition to the rational and progressive West. Defining the East as a negative vision of itself, as its inferior, not only increased the West\u2019s sense of self, but also was a way of ordering the East and making it known to the West so that it could be dominated and controlled. The discourse of Orientalism therefore served as an ideological justification of early Western imperialism, as it formed a body of knowledge and ideas that rationalized social, cultural, political, and economic control of other territories.",
+        "question": "Early Western texts referencing the East describe the people as being what?",
+        "ground_truth": "irrational and backward",
+        "model_answer": "The people of the East are not the people of the West. They are the people of the West. The people of the East are not the people",
+        "correct": false,
+        "reasoning": "The model's answer is repetitive, contradictory, and nonsensical ('The people of the East are not the people of the West. They are the people of the West.'). It fails entirely to convey the specific descriptive terms 'irrational and backward' provided in the Ground Truth."
+      },
+      {
+        "context": "On June 4, 2014, the NFL announced that the practice of branding Super Bowl games with Roman numerals, a practice established at Super Bowl V, would be temporarily suspended, and that the game would be named using Arabic numerals as Super Bowl 50 as opposed to Super Bowl L. The use of Roman numerals will be reinstated for Super Bowl LI. Jaime Weston, the league's vice president of brand and creative, explained that a primary reason for the change was the difficulty of designing an aesthetically pleasing logo with the letter \"L\" using the standardized logo template introduced at Super Bowl XLV. The logo also deviates from the template by featuring large numerals, colored in gold, behind the Vince Lombardi Trophy, instead of underneath and in silver as in the standard logo.",
+        "question": "Who is the NFL's vice president of brand and creative?",
+        "ground_truth": "Jaime Weston",
+        "model_answer": "The NFL's vice president of brand and creative, Mike Lombardi, is the NFL's vice president of brand and creative.",
+        "correct": false,
+        "reasoning": "The ground truth answer derived from the context is 'Jaime Weston'. The model incorrectly identifies the VP as 'Mike Lombardi'."
+      }
+    ]
+  }
+}
