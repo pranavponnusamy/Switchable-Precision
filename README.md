@@ -1,5 +1,7 @@
 # Efficient LLMs: Switchable & Dynamic Quantization
 
+[Short writeup](https://docs.google.com/document/d/1QReOF0WWlw49pjzUwzRn6DwSJlUe7qqoFY0CWto9I1Q/edit?usp=sharing)
+
 ## Scripts in `train/`
 - `train.py`: Main training script supporting switchable precision.
 - `train_adv.py`: Script for full finetuning using LORA. 
